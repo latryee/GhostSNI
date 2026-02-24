@@ -1,0 +1,13 @@
+﻿WinDivert License
+=================
+
+WinDivert is licensed under the GNU Lesser General Public License (LGPL) 
+version 3.0 or later.
+
+Copyright (c) 2013 - Bastiaan Bijl
+
+For more information, see: https://reqrypt.org/windivert.html
+Source code: https://github.com/basil00/Divert
+
+GhostSNI uses WinDivert as an unmodified dynamically linked library.
+GhostSNI itself is licensed under the MIT License.

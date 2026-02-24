@@ -1,0 +1,40 @@
+GhostSNI v0.3.0 - DPI Bypass Araci
+====================================
+
+KURULUM
+-------
+1. Bu klasorun icindeki tum dosyalari bir yere cikarin.
+2. Asagidaki .cmd dosyalarindan birine sag tiklayin > "Yonetici olarak calistir" secin.
+3. Program arka planda calisacak, gorev cubugunun sag alt kosesinde 
+   kucuk bir ikon gorunecektir.
+4. Kapatmak icin ikona tiklayin > "Durdur ve Cik" secin.
+
+PROFILLER
+---------
+Ana profil calismiyorsa sirasiyla digerleri deneyin:
+
+  ghostsni_turkey.cmd       Ana profil - Tum ozellikler acik + Yandex DNS
+  ghostsni_turkey_alt1.cmd  Sabit TTL=3 (burst yerine tek TTL)
+  ghostsni_turkey_alt2.cmd  Sabit TTL=5 (DPI daha uzakta olan ISS'ler icin)
+  ghostsni_turkey_alt3.cmd  DNS yonlendirme kapali (DoH kullananlar icin)
+  ghostsni_turkey_alt4.cmd  QUIC engelleme kapali + wrong-chksum kapali
+  ghostsni_turkey_alt5.cmd  Buyuk fragment bolme noktasi (4 byte)
+  ghostsni_turkey_alt6.cmd  Minimal mod - sadece fragmentation + HTTP tricks
+
+WINDOWS SERVISI (Opsiyonel)
+---------------------------
+Windows acildiginda otomatik baslatmak icin:
+
+  service_install.cmd   Servisi kur (Yonetici olarak calistirin)
+  service_remove.cmd    Servisi kaldir
+
+ONEMLI NOTLAR
+-------------
+- Yonetici yetkisi gereklidir.
+- Windows Defender uyari verebilir, bu WinDivert driverindan kaynaklanir
+  ve zararli degildir.
+- Tarayicinizda guvenli DNS (DoH) acmaniz tavsiye edilir:
+    Chrome:  Ayarlar > Gizlilik > Guvenli DNS > Acik
+    Firefox: Ayarlar > Ag > DNS over HTTPS
+- Tum tarayicilarla uyumludur (Chrome, Firefox, Edge, Opera, Brave).
+- Calismiyorsa sirasiyla diger alternatif .cmd dosyalarini deneyin.
