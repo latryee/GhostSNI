@@ -1,30 +1,17 @@
 @echo off
 title GhostSNI
-cd /d "%~dp0"
-
 net session >nul 2>&1
 if %errorlevel% neq 0 (
-    echo Yonetici yetkisi gerekli, yeniden baslatiliyor...
-    powershell -Command "Start-Process cmd.exe -ArgumentList '/c cd /d %~dp0 && %~nx0' -Verb RunAs"
+    powershell -Command "Start-Process '%~f0' -Verb RunAs"
     exit /b
 )
+cd /d "%~dp0"
 
-set "EXE="
-if exist "%~dp0build\GhostSNI.exe" set "EXE=%~dp0build\GhostSNI.exe"
-if exist "%~dp0bin\GhostSNI.exe" set "EXE=%~dp0bin\GhostSNI.exe"
+echo GhostSNI baslatiliyor...
+echo.
 
-if "%EXE%"=="" (
-    echo.
-    echo  [HATA] GhostSNI.exe bulunamadi!
-    echo  Aranan: %~dp0build\GhostSNI.exe
-    echo  Aranan: %~dp0bin\GhostSNI.exe
-    echo.
-    pause
-    exit /b 1
-)
+"build\GhostSNI.exe" -f 2 -e -b -q -p -r -s -m --dns-addr 77.88.8.8 --dns-port 53
 
 echo.
-"%EXE%" -f 2 -e -b --wrong-chksum --reverse-frag -q -p -r -s -m --dns-addr 77.88.8.8 --dns-port 53
-echo.
-echo GhostSNI kapandi. (Hata kodu: %errorlevel%)
+echo GhostSNI kapandi.
 pause

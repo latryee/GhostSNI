@@ -113,17 +113,13 @@ int main(int argc, char *argv[])
 
     ghost_print_banner(&config);
 
-    {
-        HWND console = GetConsoleWindow();
-        if (console)
-            ShowWindow(console, SW_HIDE);
-    }
-
     if (!check_admin_privileges())
     {
         fprintf(stderr,
             "[HATA] Bu program Yonetici (Administrator) olarak calistirilmalidir!\n"
             "       Sag tikla -> 'Yonetici olarak calistir' secin.\n");
+        fprintf(stderr, "\nDevam etmek icin bir tusa basin...\n");
+        getchar();
         return 1;
     }
     printf("[+] Yonetici yetkileri dogrulandi.\n");
