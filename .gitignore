@@ -19,3 +19,5 @@ cmake_install.cmake
 *.zip
 goodbyedpi-ref/
 release-temp/
+
+GhostSNI-v0.3.0-win64/
