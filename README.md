@@ -137,4 +137,4 @@ MIT License
 ## 🙏 Teşekkürler
 
 - [WinDivert](https://reqrypt.org/windivert.html) — Bastiaan Bijl
-- [GoodbyeDPI](https://github.com/ValdikSS/GoodbyeDPI) — ValdikSS (ilham kaynağı)
+
