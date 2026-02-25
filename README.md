@@ -9,10 +9,8 @@ GhostSNI, Türkiye ve diğer ülkelerdeki ISS'lerin uyguladığı DPI (Deep Pack
 ## ✨ Özellikler
 
 - **TCP Fragmentation** — TLS Client Hello'yu SNI noktasından bölerek DPI'ı atlatır
-- **Reverse Fragmentation** — Fragment'ları ters sırada göndererek sıralı birleştirme yapan DPI'ı atlatır
 - **Fake Packet Injection** — Düşük TTL'li sahte paketlerle DPI cihazını yanıltır
 - **TTL Burst Mode** — TTL=3,4,5,6,7 ile 5 ayrı sahte paket göndererek farklı ISS'leri destekler
-- **Wrong Checksum** — Sahte paketleri yanlış TCP checksum ile gönderir (DPI görür, sunucu drop eder)
 - **HTTP Host Tricks** — Header case değiştirme, boşluk silme, mix case
 - **QUIC Engelleme** — UDP 443 trafiğini drop eder, tarayıcıyı TLS'e zorlar
 - **DNS Yönlendirme** — DNS sorgularını alternatif sunucuya yönlendirir
@@ -31,25 +29,25 @@ GhostSNI, Türkiye ve diğer ülkelerdeki ISS'lerin uyguladığı DPI (Deep Pack
 
 ### Profiller — Çalışanı Bulana Kadar Dene
 
-`.cmd` dosyasına çift tıkla → CMD otomatik kapanır → sadece tray'de 👻 ikon kalır.
-Kapatmak için ikona tıkla → **"Durdur ve Çık"**.
+`.cmd` dosyasına sağ tıkla → Yönetici olarak çalıştır → GhostSNI arka planda başlar.
+Kapatmak için tray'deki hayalet ikona tıkla → **"Durdur ve Çık"**.
 
 **Biri çalışmazsa sıradakini dene:**
 
 | # | Dosya | Açıklama |
 |---|-------|----------|
-| ⭐ | `ghostsni_turkey.cmd` | **Ana profil** — Tüm silahlar açık + Yandex DNS |
+| ⭐ | `ghostsni_turkey.cmd` | **Ana profil** — Tüm özellikler + Yandex DNS |
 | 1 | `ghostsni_turkey_alt1.cmd` | Sabit TTL=3 (burst yerine tek TTL) |
 | 2 | `ghostsni_turkey_alt2.cmd` | Sabit TTL=5 (daha uzak DPI cihazları) |
 | 3 | `ghostsni_turkey_alt3.cmd` | DNS yönlendirme kapalı (DoH kullananlar için) |
-| 4 | `ghostsni_turkey_alt4.cmd` | QUIC block kapalı + wrong-chksum kapalı |
+| 4 | `ghostsni_turkey_alt4.cmd` | QUIC block kapalı (oyun uyumluluğu) |
 | 5 | `ghostsni_turkey_alt5.cmd` | Büyük fragment bölme noktası (4 byte) |
 | 6 | `ghostsni_turkey_alt6.cmd` | Minimal mod — sadece frag + HTTP tricks |
 
 ### Manuel Kullanım
 
 ```bash
-GhostSNI.exe -f 2 -e -b --wrong-chksum --reverse-frag -q -p -r -s -m --dns-addr 77.88.8.8 --dns-port 53
+GhostSNI.exe -f 2 -e -b -q -p -r -s -m --dns-addr 77.88.8.8 --dns-port 53
 ```
 
 ### Tüm Bayraklar
@@ -58,7 +56,7 @@ GhostSNI.exe -f 2 -e -b --wrong-chksum --reverse-frag -q -p -r -s -m --dns-addr 
 Modset'ler:
   -1              En uyumlu mod (sadece HTTP trick'leri)
   -2              Dengeli mod (frag + HTTP trick'leri)
-  -3              Agresif mod (frag + fake + reverse frag)
+  -3              Agresif mod (frag + fake paket)
   -4              Türkiye özel (tüm silahlar + DNS)
 
 DPI Atlatma:
@@ -66,8 +64,6 @@ DPI Atlatma:
   -e, --fake           Sahte paket enjeksiyonu (fake Client Hello)
   -t, --ttl <n>        Sahte paket TTL değeri (varsayılan: 3)
   -b, --ttl-burst      TTL burst modu (3,4,5,6,7)
-  --wrong-chksum       Sahte paketi yanlış TCP checksum ile gönder
-  --reverse-frag       Fragment'ları ters sırada gönder
   -q, --block-quic     QUIC/HTTP3 trafiğini engelle
 
 HTTP Manipülasyon:
@@ -94,12 +90,11 @@ Genel:
       ▼
   WinDivert paket yakalar
       │
-      ├─ 1. Sahte paket gönder (düşük TTL / yanlış checksum)
+      ├─ 1. Sahte paket gönder (düşük TTL)
       │     → DPI sahte SNI'yı görür, gerçeği kaçırır
-      │     → Sunucu checksum hatalı paketi drop eder
+      │     → Sunucu TTL=0 olan paketi drop eder
       │
-      ├─ 2. Gerçek paketi SNI'dan böl (reverse fragment)
-      │     → Fragment 2 önce, Fragment 1 sonra
+      ├─ 2. Gerçek paketi SNI'dan böl (fragmentation)
       │     → DPI iki parçayı birleştiremez
       │
       └─ Sunucuya ulaşır ✓
@@ -113,6 +108,16 @@ Windows açılınca otomatik başlatmak için:
 service_install.cmd    (sağ tıkla → Yönetici olarak çalıştır)
 service_remove.cmd     (kaldırmak için)
 ```
+
+## ⚠️ Sorun Giderme
+
+| Sorun | Çözüm |
+|-------|-------|
+| CMD anında kapanıyor | Sağ tıkla → **Yönetici olarak çalıştır** |
+| "GhostSNI.exe bulunamadi" | `bin\` veya `build\` klasöründe exe olmalı |
+| Oyunlarda bağlantı hatası | `ghostsni_turkey_alt4.cmd` kullan (QUIC block kapalı) |
+| Windows Defender uyarısı | False positive — izin ver |
+| Hiçbir profil çalışmıyor | DoH (Secure DNS) açık mı kontrol et |
 
 ## ⚠️ Önemli Notlar
 

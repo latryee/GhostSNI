@@ -1,13 +1,12 @@
-GhostSNI v0.3.0 - DPI Bypass Araci
+GhostSNI v0.3.1 - DPI Bypass Araci
 ====================================
 
 KURULUM
 -------
 1. Bu klasorun icindeki tum dosyalari bir yere cikarin.
 2. Asagidaki .cmd dosyalarindan birine sag tiklayin > "Yonetici olarak calistir" secin.
-3. Program arka planda calisacak, gorev cubugunun sag alt kosesinde 
-   kucuk bir ikon gorunecektir.
-4. Kapatmak icin ikona tiklayin > "Durdur ve Cik" secin.
+3. Program arka planda calisacaktir.
+4. Kapatmak icin: Gorev cubugu > Hayalet ikon > Durdur ve Cik
 
 PROFILLER
 ---------
@@ -15,9 +14,9 @@ Ana profil calismiyorsa sirasiyla digerleri deneyin:
 
   ghostsni_turkey.cmd       Ana profil - Tum ozellikler acik + Yandex DNS
   ghostsni_turkey_alt1.cmd  Sabit TTL=3 (burst yerine tek TTL)
-  ghostsni_turkey_alt2.cmd  Sabit TTL=5 (DPI daha uzakta olan ISS'ler icin)
+  ghostsni_turkey_alt2.cmd  Sabit TTL=5 (daha uzak DPI cihazlari)
   ghostsni_turkey_alt3.cmd  DNS yonlendirme kapali (DoH kullananlar icin)
-  ghostsni_turkey_alt4.cmd  QUIC engelleme kapali + wrong-chksum kapali
+  ghostsni_turkey_alt4.cmd  QUIC engelleme kapali (oyun uyumlulugu)
   ghostsni_turkey_alt5.cmd  Buyuk fragment bolme noktasi (4 byte)
   ghostsni_turkey_alt6.cmd  Minimal mod - sadece fragmentation + HTTP tricks
 
@@ -27,6 +26,13 @@ Windows acildiginda otomatik baslatmak icin:
 
   service_install.cmd   Servisi kur (Yonetici olarak calistirin)
   service_remove.cmd    Servisi kaldir
+
+SORUN GIDERME
+-------------
+- CMD aninda kapaniyorsa: Sag tik > "Yonetici olarak calistir" secin.
+- "GhostSNI.exe bulunamadi" hatasi: bin\ veya build\ klasorunde exe olmali.
+- Oyunlarda baglanti hatasi: ghostsni_turkey_alt4.cmd kullanin (QUIC kapali).
+- Windows Defender uyarisi: False positive, izin verin.
 
 ONEMLI NOTLAR
 -------------

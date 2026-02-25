@@ -1,4 +1,5 @@
 @echo off
+title GhostSNI - Servis Kaldirma
 
 net session >nul 2>&1
 if %errorlevel% neq 0 (
@@ -6,27 +7,10 @@ if %errorlevel% neq 0 (
     exit /b
 )
 
-echo =============================================================
-echo   GhostSNI - Servis Kaldirma
-echo =============================================================
-echo.
-
-echo [*] GhostSNI servisi durduruluyor...
-net stop GhostSNI >nul 2>&1
-
-timeout /t 2 /nobreak >nul
-
-echo [*] GhostSNI servisi kaldiriliyor...
-sc delete GhostSNI
-
-if %errorlevel% neq 0 (
-    echo [HATA] Servis kaldirilamadi!
-    pause
-    exit /b 1
-)
+sc stop "GhostSNI" >nul 2>&1
+sc delete "GhostSNI" >nul 2>&1
 
 echo.
-echo [+] GhostSNI servisi basariyla kaldirildi!
+echo  [+] GhostSNI servisi durduruldu ve kaldirildi.
 echo.
-
 pause

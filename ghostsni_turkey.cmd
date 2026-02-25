@@ -1,17 +1,35 @@
 @echo off
-title GhostSNI
+title GhostSNI - Ana profil - Tum ozellikler + Yandex DNS
+
 net session >nul 2>&1
 if %errorlevel% neq 0 (
     powershell -Command "Start-Process '%~f0' -Verb RunAs"
     exit /b
 )
+
 cd /d "%~dp0"
 
-echo GhostSNI baslatiliyor...
+set "EXE="
+if exist "bin\GhostSNI.exe" set "EXE=bin\GhostSNI.exe"
+if exist "build\GhostSNI.exe" set "EXE=build\GhostSNI.exe"
+if exist "GhostSNI.exe" set "EXE=GhostSNI.exe"
+
+if "%EXE%"=="" (
+    echo.
+    echo  [HATA] GhostSNI.exe bulunamadi!
+    echo  Aranan konumlar: bin\ , build\ , .\ 
+    echo.
+    pause
+    exit /b 1
+)
+
+echo  GhostSNI baslatiliyor...
+echo  Profil: Ana profil - Tum ozellikler + Yandex DNS
+echo  EXE: %EXE%
 echo.
 
-"build\GhostSNI.exe" -f 2 -e -b -q -p -r -s -m --dns-addr 77.88.8.8 --dns-port 53
+"%EXE%" -f 2 -e -b -q -p -r -s -m --dns-addr 77.88.8.8 --dns-port 53
 
 echo.
-echo GhostSNI kapandi.
+echo  GhostSNI kapandi. (Kod: %errorlevel%)
 pause
