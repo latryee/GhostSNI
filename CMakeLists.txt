@@ -10,6 +10,7 @@ add_executable(GhostSNI
     src/packet_parser.c
     src/injection.c
     src/tray.c
+    ghost.rc
 )
 
 target_include_directories(GhostSNI PRIVATE
