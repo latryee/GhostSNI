@@ -167,6 +167,12 @@ int main(int argc, char *argv[])
     tray_init();
     printf("[*] Outbound TCP + UDP trafik dinleniyor... (Ctrl+C ile durdurun)\n\n");
 
+    {
+        HWND console = GetConsoleWindow();
+        if (console)
+            ShowWindow(console, SW_HIDE);
+    }
+
     while (g_running)
     {
         if (!WinDivertRecv(g_divert_handle, packet, sizeof(packet),
