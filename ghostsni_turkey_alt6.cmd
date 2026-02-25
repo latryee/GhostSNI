@@ -17,19 +17,30 @@ if exist "GhostSNI.exe" set "EXE=GhostSNI.exe"
 if "%EXE%"=="" (
     echo.
     echo  [HATA] GhostSNI.exe bulunamadi!
-    echo  Aranan konumlar: bin\ , build\ , .\ 
+    echo  Aranan: bin\ , build\ , .\ 
     echo.
     pause
     exit /b 1
 )
 
+echo.
 echo  GhostSNI baslatiliyor...
 echo  Profil: Minimal mod
-echo  EXE: %EXE%
 echo.
 
-"%EXE%" -f 2 -q -p -r -s -m
+start "" "%EXE%" -f 2 -q -p -r -s -m
 
-echo.
-echo  GhostSNI kapandi. (Kod: %errorlevel%)
-pause
+timeout /t 2 /nobreak >nul
+
+tasklist /fi "imagename eq GhostSNI.exe" 2>nul | find /i "GhostSNI.exe" >nul
+if %errorlevel%==0 (
+    echo  [OK] GhostSNI arka planda calisiyor.
+    echo  Kapatmak icin: Tray ikonu ^> Durdur ve Cik
+    echo.
+    timeout /t 3
+) else (
+    echo  [HATA] GhostSNI baslatilamadi!
+    echo  Yonetici olarak calistirdiginizdan emin olun.
+    echo.
+    pause
+)
