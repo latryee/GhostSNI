@@ -1,5 +1,5 @@
 @echo off
-title GhostSNI - QUIC block kapali
+title GhostSNI - Sabit TTL=3 + DNS kapali + QUIC kapali
 
 net session >nul 2>&1
 if %errorlevel% neq 0 (
@@ -25,10 +25,10 @@ if "%EXE%"=="" (
 
 echo.
 echo  GhostSNI baslatiliyor...
-echo  Profil: QUIC block kapali
+echo  Profil: Sabit TTL=3 + DNS kapali + QUIC kapali
 echo.
 
-start "" "%EXE%" -f 2 -e --ttl 3 -p -r -s -m --dns-addr 77.88.8.8 --dns-port 53
+start "" "%EXE%" -f 2 -e --ttl 3 -p -r -s -m
 
 timeout /t 2 /nobreak >nul
 
@@ -40,7 +40,7 @@ if %errorlevel%==0 (
     timeout /t 3
 ) else (
     echo  [HATA] GhostSNI baslatilamadi!
-    echo  Yonetici olarak calistirdiginizdan emin olun.
+    echo  Yonetici olarak calistirdiginizden emin olun.
     echo.
     pause
 )

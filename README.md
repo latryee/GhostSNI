@@ -34,15 +34,22 @@ Kapatmak için tray'deki hayalet ikona tıkla → **"Durdur ve Çık"**.
 
 **Biri çalışmazsa sıradakini dene:**
 
-| # | Dosya | Açıklama |
-|---|-------|----------|
-| ⭐ | `ghostsni_turkey.cmd` | **Ana profil** — Tüm özellikler + Yandex DNS |
-| 1 | `ghostsni_turkey_alt1.cmd` | Sabit TTL=3 (burst yerine tek TTL) |
-| 2 | `ghostsni_turkey_alt2.cmd` | Sabit TTL=5 (daha uzak DPI cihazları) |
-| 3 | `ghostsni_turkey_alt3.cmd` | DNS yönlendirme kapalı (DoH kullananlar için) |
-| 4 | `ghostsni_turkey_alt4.cmd` | QUIC block kapalı (oyun uyumluluğu) |
-| 5 | `ghostsni_turkey_alt5.cmd` | Büyük fragment bölme noktası (4 byte) |
-| 6 | `ghostsni_turkey_alt6.cmd` | Minimal mod — sadece frag + HTTP tricks |
+| # | Dosya | Açıklama | Oyun Uyumlu |
+|---|-------|----------|:-----------:|
+| ⭐ | `ghostsni_turkey.cmd` | **Ana profil** — Tüm özellikler + Yandex DNS | ❌ |
+| 1 | `ghostsni_turkey_alt1.cmd` | Sabit TTL=3 + Yandex DNS | ❌ |
+| 2 | `ghostsni_turkey_alt2.cmd` | Sabit TTL=5 + Yandex DNS | ❌ |
+| 3 | `ghostsni_turkey_alt3.cmd` | DNS kapalı + QUIC kapalı | ✅ |
+| 4 | `ghostsni_turkey_alt4.cmd` | Sabit TTL=3 + DNS kapalı + QUIC kapalı | ✅ |
+| 5 | `ghostsni_turkey_alt5.cmd` | Büyük fragment (4 byte) + oyun uyumlu | ✅ |
+| 6 | `ghostsni_turkey_alt6.cmd` | Sadece frag + HTTP tricks (fake paket yok) | ✅ |
+| 7 | `ghostsni_turkey_alt7.cmd` | **Minimal** — sadece frag + host tricks (en güvenli) | ✅ |
+| 8 | `ghostsni_turkey_alt8.cmd` | Frag + fake (passive DPI kapalı) | ✅ |
+| 9 | `ghostsni_turkey_alt9.cmd` | Modeset 1 — En uyumlu (sadece HTTP tricks) | ✅ |
+| 10 | `ghostsni_turkey_alt10.cmd` | Modeset 2 — Dengeli (frag + HTTP tricks) | ✅ |
+| 11 | `ghostsni_turkey_alt11.cmd` | Cloudflare DNS (1.1.1.1) + tüm özellikler | ❌ |
+
+> 💡 **Discord/oyun sorunları mı var?** → Alt3, Alt6 veya Alt7'yi dene (QUIC+DNS kapalı, en güvenli).
 
 ### Manuel Kullanım
 
@@ -115,7 +122,8 @@ service_remove.cmd     (kaldırmak için)
 |-------|-------|
 | CMD anında kapanıyor | Sağ tıkla → **Yönetici olarak çalıştır** |
 | "GhostSNI.exe bulunamadi" | `bin\` veya `build\` klasöründe exe olmalı |
-| Oyunlarda bağlantı hatası | `ghostsni_turkey_alt4.cmd` kullan (QUIC block kapalı) |
+| Discord açılmıyor | Alt3, Alt6 veya Alt7 kullan (QUIC+DNS kapalı) |
+| Oyunlarda bağlantı hatası | Alt3-Alt10 arası dene (oyun uyumlu profiller) |
 | Windows Defender uyarısı | False positive — izin ver |
 | Hiçbir profil çalışmıyor | DoH (Secure DNS) açık mı kontrol et |
 
@@ -127,6 +135,7 @@ service_remove.cmd     (kaldırmak için)
   - Chrome: `Ayarlar > Gizlilik > Güvenli DNS > Açık`
   - Firefox: `Ayarlar > Ağ > DNS over HTTPS`
 - Tüm tarayıcılarla uyumlu — Chrome, Firefox, Edge, Opera, Brave
+- **QUIC nedir?** UDP 443 üzerinden çalışan yeni nesil bir protokol. Discord ve bazı oyunlar kullanır. Engellemek (`-q`) tarayıcıyı eski TLS'e zorlar ama Discord/oyunları bozabilir.
 
 ## 🏗️ Kaynak Koddan Derleme
 

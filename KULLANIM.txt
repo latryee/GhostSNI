@@ -12,13 +12,20 @@ PROFILLER
 ---------
 Ana profil calismiyorsa sirasiyla digerleri deneyin:
 
-  ghostsni_turkey.cmd       Ana profil - Tum ozellikler acik + Yandex DNS
-  ghostsni_turkey_alt1.cmd  Sabit TTL=3 (burst yerine tek TTL)
-  ghostsni_turkey_alt2.cmd  Sabit TTL=5 (daha uzak DPI cihazlari)
-  ghostsni_turkey_alt3.cmd  DNS yonlendirme kapali (DoH kullananlar icin)
-  ghostsni_turkey_alt4.cmd  QUIC engelleme kapali (oyun uyumlulugu)
-  ghostsni_turkey_alt5.cmd  Buyuk fragment bolme noktasi (4 byte)
-  ghostsni_turkey_alt6.cmd  Minimal mod - sadece fragmentation + HTTP tricks
+  ghostsni_turkey.cmd        Ana profil - Tum ozellikler + Yandex DNS
+  ghostsni_turkey_alt1.cmd   Sabit TTL=3 + Yandex DNS
+  ghostsni_turkey_alt2.cmd   Sabit TTL=5 + Yandex DNS
+  ghostsni_turkey_alt3.cmd   DNS kapali + QUIC kapali (OYUN UYUMLU)
+  ghostsni_turkey_alt4.cmd   Sabit TTL=3 + DNS kapali + QUIC kapali (OYUN UYUMLU)
+  ghostsni_turkey_alt5.cmd   Buyuk fragment (4 byte) + oyun uyumlu
+  ghostsni_turkey_alt6.cmd   Sadece frag + HTTP tricks, fake paket yok (OYUN UYUMLU)
+  ghostsni_turkey_alt7.cmd   Minimal - sadece frag + host tricks (EN GUVENLI)
+  ghostsni_turkey_alt8.cmd   Frag + fake (passive DPI kapali)
+  ghostsni_turkey_alt9.cmd   Modeset 1 - En uyumlu (sadece HTTP tricks)
+  ghostsni_turkey_alt10.cmd  Modeset 2 - Dengeli (frag + HTTP tricks)
+  ghostsni_turkey_alt11.cmd  Cloudflare DNS (1.1.1.1) + tum ozellikler
+
+  Discord/oyun calismiyorsa: Alt3, Alt6 veya Alt7 deneyin!
 
 WINDOWS SERVISI (Opsiyonel)
 ---------------------------
@@ -31,16 +38,15 @@ SORUN GIDERME
 -------------
 - CMD aninda kapaniyorsa: Sag tik > "Yonetici olarak calistir" secin.
 - "GhostSNI.exe bulunamadi" hatasi: bin\ veya build\ klasorunde exe olmali.
-- Oyunlarda baglanti hatasi: ghostsni_turkey_alt4.cmd kullanin (QUIC kapali).
+- Discord acilmiyorsa: Alt3, Alt6 veya Alt7 kullanin (QUIC+DNS kapali).
+- Oyunlarda baglanti hatasi: Alt3 ile Alt10 arasi profilleri deneyin.
 - Windows Defender uyarisi: False positive, izin verin.
 
 ONEMLI NOTLAR
 -------------
 - Yonetici yetkisi gereklidir.
-- Windows Defender uyari verebilir, bu WinDivert driverindan kaynaklanir
-  ve zararli degildir.
+- Windows Defender uyari verebilir, bu WinDivert driverindan kaynaklanir.
 - Tarayicinizda guvenli DNS (DoH) acmaniz tavsiye edilir:
     Chrome:  Ayarlar > Gizlilik > Guvenli DNS > Acik
     Firefox: Ayarlar > Ag > DNS over HTTPS
 - Tum tarayicilarla uyumludur (Chrome, Firefox, Edge, Opera, Brave).
-- Calismiyorsa sirasiyla diger alternatif .cmd dosyalarini deneyin.

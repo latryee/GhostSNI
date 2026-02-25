@@ -1,5 +1,5 @@
 @echo off
-title GhostSNI - DNS yonlendirme kapali
+title GhostSNI - DNS kapali + QUIC kapali (oyun uyumlu)
 
 net session >nul 2>&1
 if %errorlevel% neq 0 (
@@ -25,10 +25,10 @@ if "%EXE%"=="" (
 
 echo.
 echo  GhostSNI baslatiliyor...
-echo  Profil: DNS yonlendirme kapali
+echo  Profil: DNS kapali + QUIC kapali (oyun uyumlu)
 echo.
 
-start "" "%EXE%" -f 2 -e -b -q -p -r -s -m
+start "" "%EXE%" -f 2 -e -b -p -r -s -m
 
 timeout /t 2 /nobreak >nul
 
@@ -40,7 +40,7 @@ if %errorlevel%==0 (
     timeout /t 3
 ) else (
     echo  [HATA] GhostSNI baslatilamadi!
-    echo  Yonetici olarak calistirdiginizdan emin olun.
+    echo  Yonetici olarak calistirdiginizden emin olun.
     echo.
     pause
 )

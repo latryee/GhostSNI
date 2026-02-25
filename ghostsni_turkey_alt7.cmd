@@ -1,5 +1,5 @@
 @echo off
-title GhostSNI - Sabit TTL=3 + Yandex DNS
+title GhostSNI - Minimal - sadece frag + host tricks (en guvenli)
 
 net session >nul 2>&1
 if %errorlevel% neq 0 (
@@ -25,10 +25,10 @@ if "%EXE%"=="" (
 
 echo.
 echo  GhostSNI baslatiliyor...
-echo  Profil: Sabit TTL=3 + Yandex DNS
+echo  Profil: Minimal - sadece frag + host tricks (en guvenli)
 echo.
 
-start "" "%EXE%" -f 2 -e --ttl 3 -q -p -r -s -m --dns-addr 77.88.8.8 --dns-port 53
+start "" "%EXE%" -f 2 -r -s -m
 
 timeout /t 2 /nobreak >nul
 

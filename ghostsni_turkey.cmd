@@ -40,7 +40,7 @@ if %errorlevel%==0 (
     timeout /t 3
 ) else (
     echo  [HATA] GhostSNI baslatilamadi!
-    echo  Yonetici olarak calistirdiginizdan emin olun.
+    echo  Yonetici olarak calistirdiginizden emin olun.
     echo.
     pause
 )

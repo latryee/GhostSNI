@@ -1,5 +1,5 @@
 @echo off
-title GhostSNI - Sabit TTL=5
+title GhostSNI - Sabit TTL=5 + Yandex DNS
 
 net session >nul 2>&1
 if %errorlevel% neq 0 (
@@ -25,7 +25,7 @@ if "%EXE%"=="" (
 
 echo.
 echo  GhostSNI baslatiliyor...
-echo  Profil: Sabit TTL=5
+echo  Profil: Sabit TTL=5 + Yandex DNS
 echo.
 
 start "" "%EXE%" -f 2 -e --ttl 5 -q -p -r -s -m --dns-addr 77.88.8.8 --dns-port 53
@@ -40,7 +40,7 @@ if %errorlevel%==0 (
     timeout /t 3
 ) else (
     echo  [HATA] GhostSNI baslatilamadi!
-    echo  Yonetici olarak calistirdiginizdan emin olun.
+    echo  Yonetici olarak calistirdiginizden emin olun.
     echo.
     pause
 )
